@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Result Card</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 320px;
+        }
+        .card h2 {
+            margin-top: 0;
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 8px;
+        }
+        .info {
+            margin: 12px 0;
+            font-size: 16px;
+            color: #555;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .grade {
+            font-weight: bold;
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>Student Details</h2>
+        <div class="info"><strong>Name:</strong> <span id="name"></span></div>
+        <div class="info"><strong>Age:</strong> <span id="age"></span></div>
+        <div class="info"><strong>Course:</strong> <span id="course"></span></div>
+        <div class="info"><strong>Percentage:</strong> <span id="percentage" class="highlight"></span></div>
+        <div class="info"><strong>Grade:</strong> <span id="grade" class="grade"></span></div>
+    </div>
+
+<script src="script.js" defer></script>
+</body>
+</html>
