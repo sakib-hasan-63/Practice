@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Manager - CRUD & LocalStorage</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 min-h-screen p-6">
+
+    <div class="max-w-4xl mx-auto space-y-6">
+        
+        <!-- Header & Total Summary -->
+        <header class="bg-white shadow-md rounded-xl p-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>
+                <h1 class="text-2xl font-bold text-slate-800">💰 Expense Manager</h1>
+                <p class="text-sm text-slate-500">Track your daily expenses easily</p>
+            </div>
+            <div class="bg-indigo-50 border border-indigo-100 px-6 py-3 rounded-lg text-center">
+                <span class="block text-xs font-semibold text-indigo-600 uppercase tracking-wider">Total Expense</span>
+                <span id="total-expense-display" class="text-2xl font-extrabold text-indigo-700">₹0</span>
+            </div>
+        </header>
+
+        <!-- Form Section -->
+        <section class="bg-white shadow-md rounded-xl p-6">
+            <h2 id="form-title" class="text-lg font-semibold text-slate-700 mb-4">Add New Expense</h2>
+            <form id="expense-form" class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                <input type="hidden" id="expense-id">
+                
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 mb-1">Title</label>
+                    <input type="text" id="title" required placeholder="e.g. Groceries" 
+                        class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 mb-1">Amount (₹)</label>
+                    <input type="number" id="amount" required placeholder="e.g. 500" 
+                        class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 mb-1">Category</label>
+                    <select id="category" 
+                        class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <option value="Food">Food</option>
+                        <option value="Bills">Bills</option>
+                        <option value="Education">Education</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="flex items-end gap-2">
+                    <button type="submit" id="submit-btn" 
+                        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg text-sm transition">
+                        Add
+                    </button>
+                    <button type="button" id="cancel-btn" onclick="resetForm()" 
+                        class="hidden bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 px-3 rounded-lg text-sm transition">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Expense Table Section -->
+        <section class="bg-white shadow-md rounded-xl overflow-hidden">
+            <div class="p-6 border-b border-slate-100">
+                <h2 class="text-lg font-semibold text-slate-700">Expense History</h2>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse text-sm">
+                    <thead>
+                        <tr class="bg-slate-50 text-slate-600 border-b border-slate-200">
+                            <th class="py-3 px-6 font-semibold">Title</th>
+                            <th class="py-3 px-6 font-semibold">Category</th>
+                            <th class="py-3 px-6 font-semibold">Date</th>
+                            <th class="py-3 px-6 font-semibold">Amount</th>
+                            <th class="py-3 px-6 font-semibold text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="expense-table-body" class="divide-y divide-slate-100 text-slate-700">
+                        <!-- Dynamic Rows Will Be Injected Here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Integrated JavaScript Logic -->
+    <script>
+        const STORAGE_KEY = "expense_manager";
+
+        let expenses = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+        const saveExpenses = () => {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(expenses));
+        };
+
+        const addExpense = (title, amount, category) => {
+            const expense = {
+                id: crypto.randomUUID(),
+                title,
+                amount: Number(amount),
+                category,
+                date: new Date().toLocaleDateString()
+            };
+
+            expenses.push(expense);
+            saveExpenses();
+            return expense;
+        };
+
+        const deleteExpense = id => {
+            expenses = expenses.filter(expense => expense.id !== id);
+            saveExpenses();
+            renderUI();
+        };
+
+        const updateExpense = (id, updatedData) => {
+            expenses = expenses.map(expense => {
+                if (expense.id === id) {
+                    return {
+                        ...expense,
+                        ...updatedData,
+                        amount: Number(updatedData.amount)
+                    };
+                }
+                return expense;
+            });
+
+            saveExpenses();
+        };
+
+        const getTotalExpense = () => {
+            return expenses.reduce((total, expense) => total + expense.amount, 0);
+        };
+
+        // DOM Elements
+        const expenseForm = document.getElementById("expense-form");
+        const tableBody = document.getElementById("expense-table-body");
+        const totalDisplay = document.getElementById("total-expense-display");
+        const formTitle = document.getElementById("form-title");
+        const submitBtn = document.getElementById("submit-btn");
+        const cancelBtn = document.getElementById("cancel-btn");
+        const expenseIdInput = document.getElementById("expense-id");
+
+        // Render UI Function
+        function renderUI() {
+            tableBody.innerHTML = "";
+
+            if (expenses.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="5" class="text-center py-6 text-slate-400">No expenses found. Add one above!</td></tr>`;
+            } else {
+                expenses.forEach(expense => {
+                    const row = document.createElement("tr");
+                    row.className = "hover:bg-slate-50 transition";
+                    row.innerHTML = `
+                        <td class="py-3 px-6 font-medium text-slate-800">${expense.title}</td>
+                        <td class="py-3 px-6">
+                            <span class="bg-slate-100 text-slate-700 text-xs px-2.5 py-1 rounded-full font-medium">${expense.category}</span>
+                        </td>
+                        <td class="py-3 px-6 text-slate-500">${expense.date}</td>
+                        <td class="py-3 px-6 font-semibold text-slate-800">₹${expense.amount.toLocaleString()}</td>
+                        <td class="py-3 px-6 text-center space-x-2">
+                            <button onclick="prepareEdit('${expense.id}')" class="text-blue-600 hover:text-blue-800 font-medium text-xs bg-blue-50 px-2.5 py-1 rounded">Edit</button>
+                            <button onclick="deleteExpense('${expense.id}')" class="text-red-600 hover:text-red-800 font-medium text-xs bg-red-50 px-2.5 py-1 rounded">Delete</button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+
+            totalDisplay.textContent = `₹${getTotalExpense().toLocaleString()}`;
+        }
+
+        // Form Submit Handler (Handles both Add & Update)
+        expenseForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const id = expenseIdInput.value;
+            const title = document.getElementById("title").value;
+            const amount = document.getElementById("amount").value;
+            const category = document.getElementById("category").value;
+
+            if (id) {
+                // Update existing
+                updateExpense(id, { title, amount, category });
+                resetForm();
+            } else {
+                // Add new
+                addExpense(title, amount, category);
+                expenseForm.reset();
+            }
+
+            renderUI();
+        });
+
+        // Prepare Form for Editing
+        window.prepareEdit = (id) => {
+            const expense = expenses.find(exp => exp.id === id);
+            if (!expense) return;
+
+            expenseIdInput.value = expense.id;
+            document.getElementById("title").value = expense.title;
+            document.getElementById("amount").value = expense.amount;
+            document.getElementById("category").value = expense.category;
+
+            formTitle.textContent = "Edit Expense";
+            submitBtn.textContent = "Update";
+            submitBtn.className = "w-full bg-amber-600 hover:bg-amber-700 text-white font-medium py-2 px-4 rounded-lg text-sm transition";
+            cancelBtn.classList.remove("hidden");
+        };
+
+        // Reset Form State
+        window.resetForm = () => {
+            expenseForm.reset();
+            expenseIdInput.value = "";
+            formTitle.textContent = "Add New Expense";
+            submitBtn.textContent = "Add";
+            submitBtn.className = "w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg text-sm transition";
+            cancelBtn.classList.add("hidden");
+        };
+
+        // Initial Sample Data (if localStorage was completely empty)
+        if (expenses.length === 0) {
+            addExpense("Internet Bill", 799, "Bills");
+            addExpense("Groceries", 2500, "Food");
+            addExpense("JavaScript Course", 1500, "Education");
+        }
+
+        // Initial Render Load
+        renderUI();
+    </script>
+</body>
+</html>
