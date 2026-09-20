@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 6 - Advanced JS + OOP</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- JS File Connection -->
+    <script src="day-6-advanced-js.js" defer></script>
+</head>
+<body class="bg-slate-100 min-h-screen p-6 text-slate-800">
+
+    <div class="max-w-4xl mx-auto space-y-8">
+        
+        <!-- Main Title -->
+        <h1 class="text-3xl font-bold text-center text-slate-900 border-b pb-4 border-slate-300">
+            Day 6 — Advanced JavaScript & OOP Dashboard
+        </h1>
+
+        <!-- Section 1: OOP Bank Account -->
+        <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200">
+            <h2 class="text-xl font-semibold text-slate-800 border-b-2 border-indigo-500 pb-2 inline-block mb-4">
+                1. Bank Account (OOP & Private Fields)
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Account Summary -->
+                <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 space-y-2">
+                    <p class="text-sm text-slate-600">Account Holder: <span id="accountOwner" class="font-bold text-slate-800">-</span></p>
+                    <p class="text-2xl font-extrabold text-emerald-600">₹<span id="accountBalance">0</span></p>
+                </div>
+
+                <!-- Operations -->
+                <div class="space-y-3">
+                    <div class="flex gap-2">
+                        <input type="number" id="txnAmount" placeholder="Enter Amount" class="border border-slate-300 p-2 rounded-lg flex-1 focus:ring-2 focus:ring-indigo-500 outline-none">
+                        <button id="depositBtn" class="bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-4 py-2 rounded-lg transition">Deposit</button>
+                        <button id="withdrawBtn" class="bg-rose-600 hover:bg-rose-700 text-white font-medium px-4 py-2 rounded-lg transition">Withdraw</button>
+                    </div>
+                    <p id="bankError" class="text-sm font-medium text-rose-600 hidden"></p>
+                </div>
+            </div>
+
+            <!-- Transactions Table -->
+            <div class="mt-6">
+                <h3 class="font-semibold text-slate-700 mb-2">Transaction History</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm text-slate-600">
+                        <thead class="bg-slate-100 text-slate-700 uppercase text-xs">
+                            <tr>
+                                <th class="p-3">Type</th>
+                                <th class="p-3">Amount</th>
+                                <th class="p-3">Date & Time</th>
+                            </tr>
+                        </thead>
+                        <tbody id="txnTableBody" class="divide-y divide-slate-200">
+                            <!-- Transactions JS se render honge -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Section 2: Closure Counter -->
+            <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200">
+                <h2 class="text-xl font-semibold text-slate-800 border-b-2 border-amber-500 pb-2 inline-block mb-4">
+                    2. Counter App (Closure)
+                </h2>
+                
+                <div class="text-center space-y-4 my-2">
+                    <div id="counterValue" class="text-5xl font-extrabold text-slate-800">10</div>
+                    
+                    <div class="flex justify-center gap-2">
+                        <button id="decBtn" class="bg-slate-200 hover:bg-slate-300 font-bold px-4 py-2 rounded-lg">-</button>
+                        <button id="resetBtn" class="bg-slate-200 hover:bg-slate-300 font-medium px-4 py-2 rounded-lg">Reset</button>
+                        <button id="incBtn" class="bg-slate-200 hover:bg-slate-300 font-bold px-4 py-2 rounded-lg">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Higher Order Function -->
+            <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200">
+                <h2 class="text-xl font-semibold text-slate-800 border-b-2 border-cyan-500 pb-2 inline-block mb-4">
+                    3. Calculator (Higher Order Function)
+                </h2>
+
+                <div class="space-y-3">
+                    <div class="flex gap-2">
+                        <input type="number" id="numA" value="10" class="border border-slate-300 p-2 rounded-lg w-1/2 focus:ring-2 focus:ring-cyan-500 outline-none">
+                        <input type="number" id="numB" value="5" class="border border-slate-300 p-2 rounded-lg w-1/2 focus:ring-2 focus:ring-cyan-500 outline-none">
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-2">
+                        <button id="addBtn" class="bg-cyan-600 hover:bg-cyan-700 text-white font-medium py-2 rounded-lg transition">Add</button>
+                        <button id="multiplyBtn" class="bg-cyan-600 hover:bg-cyan-700 text-white font-medium py-2 rounded-lg transition">Multiply</button>
+                        <button id="divideBtn" class="bg-cyan-600 hover:bg-cyan-700 text-white font-medium py-2 rounded-lg transition">Divide</button>
+                    </div>
+
+                    <div class="bg-slate-50 p-3 rounded-lg text-center mt-2 border border-slate-200">
+                        <span class="text-sm text-slate-500">Result: </span>
+                        <span id="calcResult" class="font-bold text-lg text-slate-800">15</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
