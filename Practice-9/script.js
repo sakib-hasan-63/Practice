@@ -1,5 +1,4 @@
 // DAY 7 — Weather Dashboard
-// File: script.js
 
 const cityInput = document.querySelector("#cityInput");
 const searchBtn = document.querySelector("#searchBtn");
