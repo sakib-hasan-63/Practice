@@ -1,0 +1,132 @@
+<!-- DAY 7 — Weather Dashboard
+     File: index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Weather Dashboard</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-slate-950 text-white">
+
+  <div class="max-w-5xl mx-auto px-5 py-10">
+
+    <div class="text-center mb-10">
+      <h1 class="text-4xl md:text-5xl font-bold">
+        Weather Dashboard
+      </h1>
+
+      <p class="text-slate-400 mt-3">
+        Search any city and explore live weather information
+      </p>
+    </div>
+
+    <div class="max-w-xl mx-auto flex gap-3 mb-10">
+      <input
+        id="cityInput"
+        type="text"
+        placeholder="Enter city name..."
+        class="flex-1 px-5 py-3 rounded-xl bg-slate-900
+        border border-slate-700 outline-none
+        focus:border-cyan-400"
+      >
+
+      <button
+        id="searchBtn"
+        class="px-6 py-3 rounded-xl bg-cyan-500
+        hover:bg-cyan-400 text-slate-950 font-bold
+        transition"
+      >
+        Search
+      </button>
+    </div>
+
+    <div id="loading"
+      class="hidden text-center text-cyan-400">
+      Loading weather...
+    </div>
+
+    <div id="error"
+      class="hidden text-center text-red-400 mb-5">
+    </div>
+
+    <div
+      id="weatherCard"
+      class="hidden max-w-2xl mx-auto
+      bg-slate-900 border border-slate-800
+      rounded-3xl p-8 shadow-2xl">
+
+      <div class="flex justify-between items-center">
+
+        <div>
+          <h2 id="cityName"
+            class="text-3xl font-bold">
+          </h2>
+
+          <p id="country"
+            class="text-slate-400 mt-1">
+          </p>
+        </div>
+
+        <div id="weatherIcon"
+          class="text-6xl">
+          ☀️
+        </div>
+
+      </div>
+
+      <div class="text-center my-8">
+        <h3 id="temperature"
+          class="text-7xl font-bold">
+        </h3>
+
+        <p id="description"
+          class="text-xl text-cyan-400 capitalize">
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+
+        <div class="bg-slate-800 rounded-2xl p-4 text-center">
+          <p class="text-slate-400">Feels Like</p>
+          <h4 id="feelsLike"
+            class="text-xl font-bold mt-2">
+          </h4>
+        </div>
+
+        <div class="bg-slate-800 rounded-2xl p-4 text-center">
+          <p class="text-slate-400">Humidity</p>
+          <h4 id="humidity"
+            class="text-xl font-bold mt-2">
+          </h4>
+        </div>
+
+        <div class="bg-slate-800 rounded-2xl p-4 text-center">
+          <p class="text-slate-400">Wind</p>
+          <h4 id="wind"
+            class="text-xl font-bold mt-2">
+          </h4>
+        </div>
+
+        <div class="bg-slate-800 rounded-2xl p-4 text-center">
+          <p class="text-slate-400">Pressure</p>
+          <h4 id="pressure"
+            class="text-xl font-bold mt-2">
+          </h4>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
