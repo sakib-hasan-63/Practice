@@ -1,142 +1,118 @@
 <!-- DAY 8 — Expense Tracker -->
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
-
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1.0">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Expense Tracker</title>
-
   <script src="https://cdn.tailwindcss.com"></script>
-
 </head>
+<body class="bg-slate-950 text-slate-100 min-h-screen selection:bg-cyan-500 selection:text-slate-950">
 
-<body class="bg-slate-900 text-white min-h-screen">
-
-  <div class="max-w-6xl mx-auto px-5 py-10">
-
-    <div class="mb-10">
-
-      <h1 class="text-4xl font-bold">
-        Expense Tracker
-      </h1>
-
-      <p class="text-slate-300 mt-2">
-        Manage your daily expenses easily
-      </p>
-
+  <div class="max-w-5xl mx-auto px-5 py-12">
+    
+    <!-- Header Section -->
+    <div class="mb-10 text-center md:text-left flex flex-col md:flex-row md:items-center md:justify-between border-b border-slate-800 pb-6">
+      <div>
+        <h1 class="text-4xl font-extrabold tracking-tight bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">
+          Expense Tracker
+        </h1>
+        <p class="text-slate-400 mt-1">
+          Manage your daily expenses smartly and effortlessly
+        </p>
+      </div>
+      <div class="mt-4 md:mt-0">
+        <span class="px-4 py-2 bg-slate-900 border border-slate-800 rounded-full text-xs font-semibold text-cyan-400 tracking-wide uppercase">
+          Day 8 Project
+        </span>
+      </div>
     </div>
 
-
-    <div class="grid md:grid-cols-3 gap-5 mb-8">
-
-      <div class="bg-slate-900 p-6 rounded-2xl">
-        <p class="text-slate-400">Total Expense</p>
-
-        <h2 id="totalExpense"
-          class="text-3xl font-bold mt-2">
+    <!-- Analytics Dashboard Cards -->
+    <div class="grid md:grid-cols-3 gap-6 mb-8">
+      <div class="bg-gradient-to-br from-slate-900 to-slate-900/80 p-6 rounded-2xl border border-slate-800 shadow-xl relative overflow-hidden group hover:border-cyan-500/50 transition-all duration-300">
+        <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-cyan-500/10 rounded-full blur-xl group-hover:bg-cyan-500/20 transition-all"></div>
+        <p class="text-slate-400 text-sm font-medium">Total Expense</p>
+        <h2 id="totalExpense" class="text-3xl font-bold mt-2 text-white">
           ₹0
         </h2>
       </div>
 
-      <div class="bg-slate-900 p-6 rounded-2xl">
-        <p class="text-slate-400">Food</p>
-
-        <h2 id="foodExpense"
-          class="text-3xl font-bold mt-2">
+      <div class="bg-gradient-to-br from-slate-900 to-slate-900/80 p-6 rounded-2xl border border-slate-800 shadow-xl relative overflow-hidden group hover:border-emerald-500/50 transition-all duration-300">
+        <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-emerald-500/10 rounded-full blur-xl group-hover:bg-emerald-500/20 transition-all"></div>
+        <p class="text-slate-400 text-sm font-medium">Food</p>
+        <h2 id="foodExpense" class="text-3xl font-bold mt-2 text-white">
           ₹0
         </h2>
       </div>
 
-      <div class="bg-slate-900 p-6 rounded-2xl">
-        <p class="text-slate-400">Shopping</p>
-
-        <h2 id="shoppingExpense"
-          class="text-3xl font-bold mt-2">
+      <div class="bg-gradient-to-br from-slate-900 to-slate-900/80 p-6 rounded-2xl border border-slate-800 shadow-xl relative overflow-hidden group hover:border-purple-500/50 transition-all duration-300">
+        <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-purple-500/10 rounded-full blur-xl group-hover:bg-purple-500/20 transition-all"></div>
+        <p class="text-slate-400 text-sm font-medium">Shopping</p>
+        <h2 id="shoppingExpense" class="text-3xl font-bold mt-2 text-white">
           ₹0
         </h2>
       </div>
-
     </div>
 
-
-    <div class="bg-slate-900 rounded-2xl p-6 mb-8">
-
-      <h2 class="text-2xl font-bold mb-5">
-        Add Expense
+    <!-- Add Expense Form Card -->
+    <div class="bg-slate-900/90 backdrop-blur-lg rounded-2xl p-6 md:p-8 mb-8 border border-slate-800 shadow-2xl">
+      <h2 class="text-xl font-semibold mb-5 flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+        Add New Transaction
       </h2>
 
-      <form id="expenseForm"
-        class="grid md:grid-cols-4 gap-4">
-
+      <form id="expenseForm" class="grid md:grid-cols-4 gap-4">
         <input
           id="title"
           type="text"
-          placeholder="Expense title"
-          class="px-4 py-3 bg-slate-800 rounded-xl
-          outline-none border border-slate-700">
+          placeholder="Expense title (e.g., Coffee)"
+          class="px-4 py-3 bg-slate-950/50 rounded-xl outline-none border border-slate-700/80 text-slate-100 placeholder:text-slate-500 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all">
 
         <input
           id="amount"
           type="number"
-          placeholder="Amount"
-          class="px-4 py-3 bg-slate-800 rounded-xl
-          outline-none border border-slate-700">
+          placeholder="Amount (₹)"
+          class="px-4 py-3 bg-slate-950/50 rounded-xl outline-none border border-slate-700/80 text-slate-100 placeholder:text-slate-500 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all">
 
         <select
           id="category"
-          class="px-4 py-3 bg-slate-800 rounded-xl
-          outline-none border border-slate-700">
-
-          <option value="Food">Food</option>
-          <option value="Shopping">Shopping</option>
-          <option value="Bills">Bills</option>
-          <option value="Travel">Travel</option>
-          <option value="Education">Education</option>
-
+          class="px-4 py-3 bg-slate-950/50 rounded-xl outline-none border border-slate-700/80 text-slate-100 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all cursor-pointer">
+          <option value="Food" class="bg-slate-900">Food</option>
+          <option value="Shopping" class="bg-slate-900">Shopping</option>
+          <option value="Bills" class="bg-slate-900">Bills</option>
+          <option value="Travel" class="bg-slate-900">Travel</option>
+          <option value="Education" class="bg-slate-900">Education</option>
         </select>
 
         <button
-          class="bg-cyan-600 text-slate-900
-          font-bold rounded-xl hover:bg-cyan-400">
+          type="submit"
+          class="bg-gradient-to-r from-cyan-500 to-cyan-600 text-slate-950 font-bold px-6 py-3 rounded-xl hover:from-cyan-400 hover:to-cyan-500 shadow-lg shadow-cyan-500/20 active:scale-[0.98] transition-all duration-200">
           Add Expense
         </button>
-
       </form>
-
     </div>
 
-
-    <div class="bg-slate-900 rounded-2xl p-6">
-
-      <div class="flex justify-between items-center mb-5">
-
-        <h2 class="text-2xl font-bold">
-          Transactions
+    <!-- Transactions List Card -->
+    <div class="bg-slate-900/90 backdrop-blur-lg rounded-2xl p-6 md:p-8 border border-slate-800 shadow-2xl">
+      <div class="flex justify-between items-center mb-6 border-b border-slate-800 pb-4">
+        <h2 class="text-xl font-semibold">
+          Transactions History
         </h2>
-
         <button
           id="clearAll"
-          class="text-red-400 hover:text-red-250">
+          class="text-xs font-medium px-3 py-1.5 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 hover:text-red-300 transition-all">
           Clear All
         </button>
-
       </div>
 
-      <div id="expenseList"
-        class="space-y-3">
+      <div id="expenseList" class="space-y-3">
+        <!-- Dynamic list items will populate here -->
       </div>
-
     </div>
 
   </div>
 
   <script src="script.js"></script>
-
 </body>
 </html>
