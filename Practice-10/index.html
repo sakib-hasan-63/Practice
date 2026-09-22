@@ -1,0 +1,143 @@
+<!-- DAY 8 — Expense Tracker
+     File: index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+  <title>Expense Tracker</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-slate-950 text-white min-h-screen">
+
+  <div class="max-w-6xl mx-auto px-5 py-10">
+
+    <div class="mb-10">
+
+      <h1 class="text-4xl font-bold">
+        Expense Tracker
+      </h1>
+
+      <p class="text-slate-400 mt-2">
+        Manage your daily expenses easily
+      </p>
+
+    </div>
+
+
+    <div class="grid md:grid-cols-3 gap-5 mb-8">
+
+      <div class="bg-slate-900 p-6 rounded-2xl">
+        <p class="text-slate-400">Total Expense</p>
+
+        <h2 id="totalExpense"
+          class="text-3xl font-bold mt-2">
+          ₹0
+        </h2>
+      </div>
+
+      <div class="bg-slate-900 p-6 rounded-2xl">
+        <p class="text-slate-400">Food</p>
+
+        <h2 id="foodExpense"
+          class="text-3xl font-bold mt-2">
+          ₹0
+        </h2>
+      </div>
+
+      <div class="bg-slate-900 p-6 rounded-2xl">
+        <p class="text-slate-400">Shopping</p>
+
+        <h2 id="shoppingExpense"
+          class="text-3xl font-bold mt-2">
+          ₹0
+        </h2>
+      </div>
+
+    </div>
+
+
+    <div class="bg-slate-900 rounded-2xl p-6 mb-8">
+
+      <h2 class="text-2xl font-bold mb-5">
+        Add Expense
+      </h2>
+
+      <form id="expenseForm"
+        class="grid md:grid-cols-4 gap-4">
+
+        <input
+          id="title"
+          type="text"
+          placeholder="Expense title"
+          class="px-4 py-3 bg-slate-800 rounded-xl
+          outline-none border border-slate-700">
+
+        <input
+          id="amount"
+          type="number"
+          placeholder="Amount"
+          class="px-4 py-3 bg-slate-800 rounded-xl
+          outline-none border border-slate-700">
+
+        <select
+          id="category"
+          class="px-4 py-3 bg-slate-800 rounded-xl
+          outline-none border border-slate-700">
+
+          <option value="Food">Food</option>
+          <option value="Shopping">Shopping</option>
+          <option value="Bills">Bills</option>
+          <option value="Travel">Travel</option>
+          <option value="Education">Education</option>
+
+        </select>
+
+        <button
+          class="bg-cyan-500 text-slate-950
+          font-bold rounded-xl hover:bg-cyan-400">
+          Add Expense
+        </button>
+
+      </form>
+
+    </div>
+
+
+    <div class="bg-slate-900 rounded-2xl p-6">
+
+      <div class="flex justify-between items-center mb-5">
+
+        <h2 class="text-2xl font-bold">
+          Transactions
+        </h2>
+
+        <button
+          id="clearAll"
+          class="text-red-400 hover:text-red-300">
+          Clear All
+        </button>
+
+      </div>
+
+      <div id="expenseList"
+        class="space-y-3">
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
