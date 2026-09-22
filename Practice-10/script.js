@@ -1,5 +1,4 @@
-// DAY 8 — Expense Tracker
-// File: script.js
+// DAY 8 — Expense Tracker 
 
 const form = document.querySelector("#expenseForm");
 
