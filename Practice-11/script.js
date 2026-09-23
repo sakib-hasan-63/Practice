@@ -1,5 +1,4 @@
-// DAY 9 — Quiz Application
-// File: script.js
+// — Quiz Application
 
 const questions = [
 
