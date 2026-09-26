@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Kanban Task Board</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+
+<body class="bg-slate-950 text-white min-h-screen">
+
+
+    <!-- Main Container -->
+    <div class="max-w-7xl mx-auto px-5 py-10">
+
+
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row
+                    justify-between gap-5 mb-10">
+
+            <div>
+
+                <h1 class="text-4xl font-bold">
+                    Kanban Task Board
+                </h1>
+
+                <p class="text-slate-400 mt-2">
+                    Organize your tasks and track your progress
+                </p>
+
+            </div>
+
+
+            <button
+                id="clearCompleted"
+                class="bg-red-500 px-5 py-3
+                       rounded-xl font-bold
+                       hover:bg-red-400 transition">
+
+                Clear Completed
+
+            </button>
+
+        </div>
+
+
+
+        <!-- Add Task Form -->
+        <div class="bg-slate-900 p-5 rounded-2xl mb-8">
+
+            <form id="taskForm"
+                class="grid md:grid-cols-4 gap-4">
+
+
+                <!-- Task Name -->
+                <input
+                    id="taskTitle"
+                    type="text"
+                    placeholder="Enter task title"
+                    class="px-4 py-3 bg-slate-800
+                           rounded-xl outline-none
+                           border border-transparent
+                           focus:border-cyan-400">
+
+
+                <!-- Priority -->
+                <select
+                    id="taskPriority"
+                    class="px-4 py-3 bg-slate-800
+                           rounded-xl outline-none
+                           border border-transparent
+                           focus:border-cyan-400">
+
+                    <option value="Low">
+                        Low Priority
+                    </option>
+
+                    <option value="Medium">
+                        Medium Priority
+                    </option>
+
+                    <option value="High">
+                        High Priority
+                    </option>
+
+                </select>
+
+
+                <!-- Status -->
+                <select
+                    id="taskStatus"
+                    class="px-4 py-3 bg-slate-800
+                           rounded-xl outline-none
+                           border border-transparent
+                           focus:border-cyan-400">
+
+                    <option value="todo">
+                        To Do
+                    </option>
+
+                    <option value="progress">
+                        In Progress
+                    </option>
+
+                    <option value="completed">
+                        Completed
+                    </option>
+
+                </select>
+
+
+                <!-- Add Button -->
+                <button
+                    type="submit"
+                    class="bg-cyan-500 text-slate-950
+                           font-bold rounded-xl
+                           hover:bg-cyan-400
+                           transition">
+
+                    Add Task
+
+                </button>
+
+            </form>
+
+        </div>
+
+
+
+        <!-- Kanban Columns -->
+        <div class="grid lg:grid-cols-3 gap-6">
+
+
+            <!-- To Do -->
+            <div class="bg-slate-900 rounded-2xl p-5">
+
+
+                <div class="flex justify-between
+                            items-center mb-5">
+
+                    <h2 class="text-xl font-bold">
+                        To Do
+                    </h2>
+
+                    <span
+                        id="todoCount"
+                        class="bg-slate-800
+                               px-3 py-1
+                               rounded-full">
+
+                        0
+
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="todoList"
+                    class="space-y-4">
+
+                </div>
+
+            </div>
+
+
+
+            <!-- In Progress -->
+            <div class="bg-slate-900 rounded-2xl p-5">
+
+
+                <div class="flex justify-between
+                            items-center mb-5">
+
+                    <h2 class="text-xl font-bold">
+                        In Progress
+                    </h2>
+
+                    <span
+                        id="progressCount"
+                        class="bg-slate-800
+                               px-3 py-1
+                               rounded-full">
+
+                        0
+
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="progressList"
+                    class="space-y-4">
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Completed -->
+            <div class="bg-slate-900 rounded-2xl p-5">
+
+
+                <div class="flex justify-between
+                            items-center mb-5">
+
+                    <h2 class="text-xl font-bold">
+                        Completed
+                    </h2>
+
+                    <span
+                        id="completedCount"
+                        class="bg-slate-800
+                               px-3 py-1
+                               rounded-full">
+
+                        0
+
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="completedList"
+                    class="space-y-4">
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
